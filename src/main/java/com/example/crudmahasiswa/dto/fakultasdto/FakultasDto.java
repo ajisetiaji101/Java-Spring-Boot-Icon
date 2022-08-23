@@ -1,5 +1,7 @@
 package com.example.crudmahasiswa.dto.fakultasdto;
 
+import com.example.crudmahasiswa.models.Fakultas;
+
 import java.util.UUID;
 
 public class FakultasDto {

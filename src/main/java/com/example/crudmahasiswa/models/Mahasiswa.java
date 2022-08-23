@@ -43,17 +43,6 @@ public class Mahasiswa {
 
     }
 
-    public Mahasiswa(UUID id, String mahasiswaName, Integer mahasiswaAge, String mahasiswaGenre, String mahasiswaAddress, Fakultas fakultas, Jurusan jurusan, Set<Matakuliah> matakuliahs) {
-        this.id = id;
-        this.mahasiswaName = mahasiswaName;
-        this.mahasiswaAge = mahasiswaAge;
-        this.mahasiswaGenre = mahasiswaGenre;
-        this.mahasiswaAddress = mahasiswaAddress;
-        this.fakultas = fakultas;
-        this.jurusan = jurusan;
-        this.matakuliahs = matakuliahs;
-    }
-
     public UUID getId() {
         return id;
     }

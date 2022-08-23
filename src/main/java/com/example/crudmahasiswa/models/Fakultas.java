@@ -1,5 +1,7 @@
 package com.example.crudmahasiswa.models;
 
+import com.example.crudmahasiswa.dto.fakultasdto.FakultasDto;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
@@ -50,4 +52,5 @@ public class Fakultas {
     public void setJurusan(List<Jurusan> jurusan) {
         this.jurusan = jurusan;
     }
+
 }

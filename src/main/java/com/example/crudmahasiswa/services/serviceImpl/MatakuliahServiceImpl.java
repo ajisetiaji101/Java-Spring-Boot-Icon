@@ -33,11 +33,18 @@ public class MatakuliahServiceImpl implements MatakuliahService {
         matakuliah.setMatakuliahName(matakuliahInsertDto.getMatakuliahName());
         matakuliah.setJurusan(jurusanRepository.findById(matakuliahInsertDto.getJurusanId()).get());
 
+
         matakuliahRepository.save(matakuliah);
 
         MatakuliahDto matakuliahDto = new MatakuliahDto();
         matakuliahDto.setId(matakuliah.getId());
         matakuliahDto.setMatakuliahName(matakuliah.getMatakuliahName());
+
+        JurusanDto jurusanDto = new JurusanDto();
+        jurusanDto.setId(matakuliah.getJurusan().getId());
+        jurusanDto.setJurusanName(matakuliah.getJurusan().getJurusanName());
+
+        matakuliahDto.setJurusan(jurusanDto);
 
         return matakuliahDto;
     }
@@ -52,6 +59,21 @@ public class MatakuliahServiceImpl implements MatakuliahService {
             MatakuliahDto matakuliahDto = new MatakuliahDto();
             matakuliahDto.setId(matakuliah.getId());
             matakuliahDto.setMatakuliahName(matakuliah.getMatakuliahName());
+
+            JurusanDto jurusanDto = new JurusanDto();
+            jurusanDto.setId(matakuliah.getJurusan().getId());
+            jurusanDto.setJurusanName(matakuliah.getJurusan().getJurusanName());
+
+
+            FakultasDto fakultasDto = new FakultasDto();
+            fakultasDto.setId(matakuliah.getJurusan().getFakultas().getId());
+            fakultasDto.setFakultasName(matakuliah.getJurusan().getFakultas().getFakultasName());
+
+            jurusanDto.setFakultas(fakultasDto);
+
+            matakuliahDto.setJurusan(jurusanDto);
+
+
 
             matakuliahDtos.add(matakuliahDto);
         }

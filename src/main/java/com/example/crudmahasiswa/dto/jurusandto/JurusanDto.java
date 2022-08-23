@@ -15,16 +15,16 @@ public class JurusanDto {
 
     private String jurusanName;
 
-    private FakultasDto fakultasDto;
+    private FakultasDto fakultas;
 
     public JurusanDto(){
 
     }
 
-    public JurusanDto(UUID id, String jurusanName, FakultasDto fakultasDto) {
+    public JurusanDto(UUID id, String jurusanName, FakultasDto fakultas) {
         this.id = id;
         this.jurusanName = jurusanName;
-        this.fakultasDto = fakultasDto;
+        this.fakultas = fakultas;
     }
 
     public UUID getId() {
@@ -43,11 +43,11 @@ public class JurusanDto {
         this.jurusanName = jurusanName;
     }
 
-    public FakultasDto getFakultasDto() {
-        return fakultasDto;
+    public FakultasDto getFakultas() {
+        return fakultas;
     }
 
-    public void setFakultasDto(FakultasDto fakultasDto) {
-        this.fakultasDto = fakultasDto;
+    public void setFakultas(FakultasDto fakultas) {
+        this.fakultas = fakultas;
     }
 }

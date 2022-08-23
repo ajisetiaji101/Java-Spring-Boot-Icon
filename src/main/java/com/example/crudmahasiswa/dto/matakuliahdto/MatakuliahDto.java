@@ -1,5 +1,8 @@
 package com.example.crudmahasiswa.dto.matakuliahdto;
 
+import com.example.crudmahasiswa.dto.fakultasdto.FakultasDto;
+import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
+import com.example.crudmahasiswa.dto.jurusandto.JurusanReadDto;
 import com.example.crudmahasiswa.models.Jurusan;
 import com.example.crudmahasiswa.models.Matakuliah;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,13 +16,14 @@ public class MatakuliahDto {
 
     private String matakuliahName;
 
-    private Jurusan jurusan;
+    private JurusanDto jurusan;
+
 
     public MatakuliahDto(){
 
     }
 
-    public MatakuliahDto(UUID id, String matakuliahName, Jurusan jurusan) {
+    public MatakuliahDto(UUID id, String matakuliahName, JurusanDto jurusan) {
         this.id = id;
         this.matakuliahName = matakuliahName;
         this.jurusan = jurusan;
@@ -41,11 +45,11 @@ public class MatakuliahDto {
         this.matakuliahName = matakuliahName;
     }
 
-    public Jurusan getJurusan() {
+    public JurusanDto getJurusan() {
         return jurusan;
     }
 
-    public void setJurusan(Jurusan jurusan) {
+    public void setJurusan(JurusanDto jurusan) {
         this.jurusan = jurusan;
     }
 }

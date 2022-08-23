@@ -37,6 +37,10 @@ public class JurusanServiceImpl implements JurusanService {
         JurusanDto jurusanDto = new JurusanDto();
         jurusanDto.setId(jurusan.getId());
         jurusanDto.setJurusanName(jurusan.getJurusanName());
+        FakultasDto fakultasDto = new FakultasDto();
+        fakultasDto.setId(jurusan.getFakultas().getId());
+        fakultasDto.setFakultasName(jurusan.getFakultas().getFakultasName());
+        jurusanDto.setFakultas(fakultasDto);
 
         return jurusanDto;
 
@@ -52,6 +56,11 @@ public class JurusanServiceImpl implements JurusanService {
             JurusanDto jurusanDto = new JurusanDto();
             jurusanDto.setId(jurusan.getId());
             jurusanDto.setJurusanName(jurusan.getJurusanName());
+            FakultasDto fakultasDto = new FakultasDto();
+            fakultasDto.setId(jurusan.getFakultas().getId());
+            fakultasDto.setFakultasName(jurusan.getFakultas().getFakultasName());
+            jurusanDto.setFakultas(fakultasDto);
+
 
             jurusanDtos.add(jurusanDto);
         }

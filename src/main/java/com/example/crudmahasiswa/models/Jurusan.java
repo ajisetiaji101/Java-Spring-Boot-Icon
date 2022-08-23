@@ -1,7 +1,6 @@
 package com.example.crudmahasiswa.models;
 
 import com.example.crudmahasiswa.dto.fakultasdto.FakultasDto;
-import com.example.crudmahasiswa.dto.fakultasdto.FakultasInsertDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -22,8 +21,8 @@ public class Jurusan {
     private List<Matakuliah> matakuliah;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fakultas_id")
     @JsonIgnore
+    @JoinColumn(name = "fakultas_id")
     private Fakultas fakultas;
 
     public Jurusan(){
@@ -59,4 +58,5 @@ public class Jurusan {
     public void setFakultas(Fakultas fakultas) {
         this.fakultas = fakultas;
     }
+
 }
