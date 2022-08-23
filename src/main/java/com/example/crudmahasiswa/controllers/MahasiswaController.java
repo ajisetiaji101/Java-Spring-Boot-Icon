@@ -2,6 +2,8 @@ package com.example.crudmahasiswa.controllers;
 
 import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaDto;
 import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertMaperlDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaMapelDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanInsertDto;
 import com.example.crudmahasiswa.helpers.ResponseUtil;
@@ -68,5 +70,19 @@ public class MahasiswaController {
     @DeleteMapping("/{id}")
     public void remove(@PathVariable("id") UUID id) {
             mahasiswaService.removeOne(id);
+    }
+
+    @PostMapping("/mapel")
+    public ResponseEntity<ResponseDto<MahasiswaMapelDto>> mapel(@RequestBody MahasiswaInsertMaperlDto mahasiswaInsertMaperlDto){
+        try{
+            MahasiswaMapelDto mahasiswaMapelDto = mahasiswaService.mapelBaru(mahasiswaInsertMaperlDto);
+
+            ResponseDto<MahasiswaMapelDto> responseDto = ResponseUtil.responseDtoSuccess(mahasiswaMapelDto, "Create data mahasiswa success");
+
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        }catch (Exception e){
+            ResponseDto<MahasiswaMapelDto> responseDto = ResponseUtil.responseDtoFailed(null, "Gagal create data jurusan", HttpStatus.CREATED);
+            return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
+        }
     }
 }

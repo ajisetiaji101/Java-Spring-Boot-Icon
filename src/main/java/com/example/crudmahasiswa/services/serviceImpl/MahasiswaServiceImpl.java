@@ -2,6 +2,8 @@ package com.example.crudmahasiswa.services.serviceImpl;
 
 import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaDto;
 import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertMaperlDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaMapelDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
 import com.example.crudmahasiswa.models.Jurusan;
 import com.example.crudmahasiswa.models.Mahasiswa;
@@ -15,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -77,6 +76,7 @@ public class MahasiswaServiceImpl implements MahasiswaService {
             mahasiswaDto.setMahasiswaAddress(mahasiswa.getMahasiswaAddress());
             mahasiswaDto.setFakultas(mahasiswa.getFakultas());
             mahasiswaDto.setJurusan(mahasiswa.getJurusan());
+            mahasiswaDto.setMatakuliahs(mahasiswa.getMatakuliahs());
 
             mahasiswaDtos.add(mahasiswaDto);
         }
@@ -110,5 +110,29 @@ public class MahasiswaServiceImpl implements MahasiswaService {
     @Override
     public void removeOne(UUID id) {
         mahasiswaRepository.deleteById(id);
+    }
+
+    @Override
+    public MahasiswaMapelDto mapelBaru(MahasiswaInsertMaperlDto mahasiswaInsertMaperlDto) {
+
+        Mahasiswa mahasiswa = mahasiswaRepository.findById(mahasiswaInsertMaperlDto.getIdMahasiswa()).get();
+
+        MahasiswaMapelDto  mahasiswaMapelDto1 = new MahasiswaMapelDto();
+        mahasiswaMapelDto1.setId(mahasiswa.getId());
+        mahasiswaMapelDto1.setMahasiswaName(mahasiswa.getMahasiswaName());
+
+        Set<Matakuliah> matakuliahs = new HashSet<>();
+
+        Matakuliah matakuliah =  matakuliahRepository.findById(mahasiswaInsertMaperlDto.getIdMataKuliah()).get();
+        matakuliahs.add(matakuliah);
+
+        mahasiswaMapelDto1.setMatakuliahs(matakuliahs);
+
+        mahasiswa.setMatakuliahs(matakuliahs);
+
+        mahasiswaRepository.save(mahasiswa);
+
+        return mahasiswaMapelDto1;
+
     }
 }
