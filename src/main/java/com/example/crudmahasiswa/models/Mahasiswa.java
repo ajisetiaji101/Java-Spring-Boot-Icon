@@ -26,11 +26,11 @@ public class Mahasiswa {
     private String mahasiswaAddress;
 
     @OneToOne
-    @JoinColumn(name = "fakultas_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "fakultas_id", referencedColumnName = "id")
     private Fakultas fakultas;
 
     @OneToOne
-    @JoinColumn(name = "jurusan_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "jurusan_id", referencedColumnName = "id")
     private Jurusan jurusan;
 
     @ManyToMany(fetch = FetchType.EAGER)
