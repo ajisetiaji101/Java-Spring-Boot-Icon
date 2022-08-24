@@ -1,10 +1,8 @@
 package com.example.crudmahasiswa.services.serviceImpl;
 
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertMaperlDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaMapelDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.*;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
+import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.models.Jurusan;
 import com.example.crudmahasiswa.models.Mahasiswa;
 import com.example.crudmahasiswa.models.Matakuliah;
@@ -134,5 +132,39 @@ public class MahasiswaServiceImpl implements MahasiswaService {
 
         return mahasiswaMapelDto1;
 
+    }
+
+    @Override
+    public List<MahasiswaGetAllMapel> getMapel() {
+        List<Mahasiswa> mahasiswas = mahasiswaRepository.findAll();
+
+        List<MahasiswaGetAllMapel> mahasiswaMapelDtos = new ArrayList<>();
+
+        for(Mahasiswa mahasiswa: mahasiswas){
+            MahasiswaGetAllMapel mahasiswaMapelDto = new MahasiswaGetAllMapel();
+
+            mahasiswaMapelDto.setId(mahasiswa.getId());
+            mahasiswaMapelDto.setMahasiswaName(mahasiswa.getMahasiswaName());
+
+            Set<MatakuliahDto> matakuliahDtos = new HashSet<>();
+            Set<Matakuliah> matakuliahs = mahasiswa.getMatakuliahs();
+            for(Matakuliah matakuliah: matakuliahs){
+                MatakuliahDto matakuliahDto = new MatakuliahDto();
+                matakuliahDto.setId(matakuliah.getId());
+                matakuliahDto.setMatakuliahName(matakuliah.getMatakuliahName());
+                JurusanDto jurusanDto = new JurusanDto();
+                jurusanDto.setJurusanName(matakuliah.getJurusan().getJurusanName());
+                jurusanDto.setId(matakuliah.getId());
+                matakuliahDto.setJurusan(jurusanDto);
+
+                matakuliahDtos.add(matakuliahDto);
+            }
+
+            mahasiswaMapelDto.setMatakuliahs(matakuliahDtos);
+
+            mahasiswaMapelDtos.add(mahasiswaMapelDto);
+        }
+
+        return mahasiswaMapelDtos;
     }
 }

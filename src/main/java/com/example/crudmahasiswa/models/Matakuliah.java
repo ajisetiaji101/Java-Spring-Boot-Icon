@@ -21,7 +21,6 @@ public class Matakuliah {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jurusan_id")
-    @JsonIgnore
     private Jurusan jurusan;
 
     @ManyToMany(fetch = FetchType.LAZY,
@@ -30,7 +29,6 @@ public class Matakuliah {
                     CascadeType.MERGE
             },
             mappedBy = "matakuliahs")
-    @JsonIgnore
     private Set<Mahasiswa> mahasiswas = new HashSet<>();
 
     public Matakuliah(){

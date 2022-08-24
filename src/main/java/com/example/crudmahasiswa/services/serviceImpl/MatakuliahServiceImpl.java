@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Transactional
 @Service
@@ -79,4 +80,13 @@ public class MatakuliahServiceImpl implements MatakuliahService {
         }
         return matakuliahDtos;
     }
+
+    @Override
+    public List<Matakuliah> getData() {
+        List<Matakuliah> matakuliahs = matakuliahRepository.findAll();
+
+        return matakuliahs;
+    }
+
+
 }

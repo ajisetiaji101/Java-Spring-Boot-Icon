@@ -5,6 +5,7 @@ import com.example.crudmahasiswa.dto.jurusandto.JurusanInsertDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahInsertDto;
 import com.example.crudmahasiswa.helpers.ResponseUtil;
+import com.example.crudmahasiswa.models.Matakuliah;
 import com.example.crudmahasiswa.models.ResponseDto;
 import com.example.crudmahasiswa.services.JurusanService;
 import com.example.crudmahasiswa.services.MatakuliahService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/matakuliah")
@@ -44,6 +46,20 @@ public class MatakuliahController {
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         }catch (Exception e){
             ResponseDto<List<MatakuliahDto>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
+            return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
+
+        }
+    }
+
+    @GetMapping("mahasiswa")
+    public ResponseEntity<ResponseDto<List<Matakuliah>>>getMahasiswa(){
+        try{
+            List<Matakuliah> matakuliahDtos = matakuliahService.getData();
+
+            ResponseDto<List<Matakuliah>> responseDto = ResponseUtil.responseDtoSuccess(matakuliahDtos, "Data Seluruh Mata Kuliah Success");
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        }catch (Exception e){
+            ResponseDto<List<Matakuliah>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
             return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
 
         }

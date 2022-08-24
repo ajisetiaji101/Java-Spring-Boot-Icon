@@ -1,9 +1,6 @@
 package com.example.crudmahasiswa.controllers;
 
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaInsertMaperlDto;
-import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaMapelDto;
+import com.example.crudmahasiswa.dto.MahasiswaDto.*;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanInsertDto;
 import com.example.crudmahasiswa.helpers.ResponseUtil;
@@ -85,4 +82,19 @@ public class MahasiswaController {
             return new ResponseEntity<>(responseDto, HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/mapel")
+    public ResponseEntity<ResponseDto<List<MahasiswaGetAllMapel>>>getDataMapel(){
+        try{
+            List<MahasiswaGetAllMapel> mahasiswaDtos = mahasiswaService.getMapel();
+
+            ResponseDto<List<MahasiswaGetAllMapel>> responseDto = ResponseUtil.responseDtoSuccess(mahasiswaDtos, "Data Seluruh Mapel Mahasiswa Success");
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        }catch (Exception e){
+            ResponseDto<List<MahasiswaGetAllMapel>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
+            return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
+
+        }
+    }
+
 }
