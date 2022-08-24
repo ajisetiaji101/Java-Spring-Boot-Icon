@@ -1,5 +1,6 @@
 package com.example.crudmahasiswa.dto.MahasiswaDto;
 
+import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.models.Matakuliah;
 
 import java.util.HashSet;
@@ -12,13 +13,13 @@ public class MahasiswaMapelDto {
 
     private String mahasiswaName;
 
-    private Set<Matakuliah> matakuliahs = new HashSet<>();
+    private Set<MatakuliahDto> matakuliahs = new HashSet<>();
 
     public MahasiswaMapelDto(){
 
     }
 
-    public MahasiswaMapelDto(UUID id, String mahasiswaName, Set<Matakuliah> matakuliahs) {
+    public MahasiswaMapelDto(UUID id, String mahasiswaName, Set<MatakuliahDto> matakuliahs) {
         this.id = id;
         this.mahasiswaName = mahasiswaName;
         this.matakuliahs = matakuliahs;
@@ -40,11 +41,11 @@ public class MahasiswaMapelDto {
         this.mahasiswaName = mahasiswaName;
     }
 
-    public Set<Matakuliah> getMatakuliahs() {
+    public Set<MatakuliahDto> getMatakuliahs() {
         return matakuliahs;
     }
 
-    public void setMatakuliahs(Set<Matakuliah> matakuliahs) {
+    public void setMatakuliahs(Set<MatakuliahDto> matakuliahs) {
         this.matakuliahs = matakuliahs;
     }
 }

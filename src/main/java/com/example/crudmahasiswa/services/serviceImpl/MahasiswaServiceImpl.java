@@ -119,14 +119,32 @@ public class MahasiswaServiceImpl implements MahasiswaService {
         mahasiswaMapelDto1.setId(mahasiswa.getId());
         mahasiswaMapelDto1.setMahasiswaName(mahasiswa.getMahasiswaName());
 
-        Set<Matakuliah> matakuliahs = new HashSet<>();
+        Set<MatakuliahDto> matakuliahs = new HashSet<>();
 
         Matakuliah matakuliah =  matakuliahRepository.findById(mahasiswaInsertMaperlDto.getIdMataKuliah()).get();
-        matakuliahs.add(matakuliah);
+
+        MatakuliahDto matakuliahDto = new MatakuliahDto();
+        matakuliahDto.setId(matakuliah.getId());
+        matakuliahDto.setMatakuliahName(matakuliah.getMatakuliahName());
+
+        JurusanDto jurusanDto = new JurusanDto();
+        jurusanDto.setId(matakuliah.getJurusan().getId());
+        jurusanDto.setJurusanName(matakuliah.getJurusan().getJurusanName());
+        matakuliahDto.setJurusan(jurusanDto);
+
+        matakuliahs.add(matakuliahDto);
 
         mahasiswaMapelDto1.setMatakuliahs(matakuliahs);
 
-        mahasiswa.setMatakuliahs(matakuliahs);
+        Set<Matakuliah> matakuliahs1 = matakuliahRepository.findByMahasiswasId(mahasiswaInsertMaperlDto.getIdMahasiswa());
+
+        Matakuliah matakuliah1 = new Matakuliah();
+        matakuliah1.setId(matakuliah.getId());
+        matakuliah1.setMatakuliahName(matakuliah.getMatakuliahName());
+
+        matakuliahs1.add(matakuliah1);
+
+        mahasiswa.setMatakuliahs(matakuliahs1);
 
         mahasiswaRepository.save(mahasiswa);
 
