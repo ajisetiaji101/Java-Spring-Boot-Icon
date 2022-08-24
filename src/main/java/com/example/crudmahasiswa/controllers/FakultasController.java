@@ -6,6 +6,7 @@ import com.example.crudmahasiswa.helpers.ResponseUtil;
 import com.example.crudmahasiswa.models.Fakultas;
 import com.example.crudmahasiswa.models.ResponseDto;
 import com.example.crudmahasiswa.services.FakultasService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/fakultas")
+@Tag(name = "Fakultas")
 public class FakultasController {
 
     @Autowired

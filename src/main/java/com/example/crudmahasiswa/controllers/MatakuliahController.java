@@ -10,6 +10,7 @@ import com.example.crudmahasiswa.models.Matakuliah;
 import com.example.crudmahasiswa.models.ResponseDto;
 import com.example.crudmahasiswa.services.JurusanService;
 import com.example.crudmahasiswa.services.MatakuliahService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/matakuliah")
+@Tag(name = "Mata Kuliah")
 public class MatakuliahController {
     @Autowired
     MatakuliahService matakuliahService;
