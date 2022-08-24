@@ -1,11 +1,14 @@
 package com.example.crudmahasiswa.services.serviceImpl;
 
+import com.example.crudmahasiswa.dto.MahasiswaDto.MahasiswaDto;
 import com.example.crudmahasiswa.dto.fakultasdto.FakultasDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
+import com.example.crudmahasiswa.dto.matakuliahdto.MataKuliahMahasiswaDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahInsertDto;
 import com.example.crudmahasiswa.models.Fakultas;
 import com.example.crudmahasiswa.models.Jurusan;
+import com.example.crudmahasiswa.models.Mahasiswa;
 import com.example.crudmahasiswa.models.Matakuliah;
 import com.example.crudmahasiswa.repository.JurusanRepository;
 import com.example.crudmahasiswa.repository.MatakuliahRepository;
@@ -14,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Transactional
 @Service
@@ -82,10 +83,36 @@ public class MatakuliahServiceImpl implements MatakuliahService {
     }
 
     @Override
-    public List<Matakuliah> getData() {
+    public List<MataKuliahMahasiswaDto> getData() {
         List<Matakuliah> matakuliahs = matakuliahRepository.findAll();
 
-        return matakuliahs;
+        List<MataKuliahMahasiswaDto> matakuliahDtos = new ArrayList<>();
+
+        for(Matakuliah matakuliah: matakuliahs){
+            MataKuliahMahasiswaDto matakuliahDto = new MataKuliahMahasiswaDto();
+            matakuliahDto.setId(matakuliah.getId());
+            matakuliahDto.setMatakuliahName(matakuliah.getMatakuliahName());
+
+            Set<MahasiswaDto> mahasiswaDtos = new HashSet<>();
+
+            Set<Mahasiswa> mahasiswas = matakuliah.getMahasiswas();
+            for(Mahasiswa mahasiswa: mahasiswas){
+                MahasiswaDto mahasiswaDto = new MahasiswaDto();
+                mahasiswaDto.setId(mahasiswa.getId());
+                mahasiswaDto.setMahasiswaName(mahasiswa.getMahasiswaName());
+                mahasiswaDto.setMahasiswaAge(mahasiswa.getMahasiswaAge());
+                mahasiswaDto.setMahasiswaAddress(mahasiswa.getMahasiswaAddress());
+                mahasiswaDto.setMahasiswaGenre(mahasiswa.getMahasiswaGenre());
+
+                mahasiswaDtos.add(mahasiswaDto);
+            }
+            matakuliahDto.setMahasiswas(mahasiswaDtos);
+
+
+            matakuliahDtos.add(matakuliahDto);
+        }
+
+        return matakuliahDtos;
     }
 
 

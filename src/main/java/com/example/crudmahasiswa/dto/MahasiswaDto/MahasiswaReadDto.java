@@ -1,17 +1,8 @@
 package com.example.crudmahasiswa.dto.MahasiswaDto;
 
-import com.example.crudmahasiswa.models.Fakultas;
-import com.example.crudmahasiswa.models.Jurusan;
-import com.example.crudmahasiswa.models.Matakuliah;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
-public class MahasiswaDto {
-
+public class MahasiswaReadDto {
     private UUID id;
 
     private String mahasiswaName;
@@ -22,26 +13,16 @@ public class MahasiswaDto {
 
     private String mahasiswaAddress;
 
-    private Fakultas fakultas;
-
-    private Jurusan jurusan;
-
-    @JsonIgnore
-    private Set<Matakuliah> matakuliahs = new HashSet<>();
-
-    public MahasiswaDto(){
+    public MahasiswaReadDto(){
 
     }
 
-    public MahasiswaDto(UUID id, String mahasiswaName, Integer mahasiswaAge, String mahasiswaGenre, String mahasiswaAddress, Fakultas fakultas, Jurusan jurusan, Set<Matakuliah> matakuliahs) {
+    public MahasiswaReadDto(UUID id, String mahasiswaName, Integer mahasiswaAge, String mahasiswaGenre, String mahasiswaAddress) {
         this.id = id;
         this.mahasiswaName = mahasiswaName;
         this.mahasiswaAge = mahasiswaAge;
         this.mahasiswaGenre = mahasiswaGenre;
         this.mahasiswaAddress = mahasiswaAddress;
-        this.fakultas = fakultas;
-        this.jurusan = jurusan;
-        this.matakuliahs = matakuliahs;
     }
 
     public UUID getId() {
@@ -82,29 +63,5 @@ public class MahasiswaDto {
 
     public void setMahasiswaAddress(String mahasiswaAddress) {
         this.mahasiswaAddress = mahasiswaAddress;
-    }
-
-    public Fakultas getFakultas() {
-        return fakultas;
-    }
-
-    public void setFakultas(Fakultas fakultas) {
-        this.fakultas = fakultas;
-    }
-
-    public Jurusan getJurusan() {
-        return jurusan;
-    }
-
-    public void setJurusan(Jurusan jurusan) {
-        this.jurusan = jurusan;
-    }
-
-    public Set<Matakuliah> getMatakuliahs() {
-        return matakuliahs;
-    }
-
-    public void setMatakuliahs(Set<Matakuliah> matakuliahs) {
-        this.matakuliahs = matakuliahs;
     }
 }

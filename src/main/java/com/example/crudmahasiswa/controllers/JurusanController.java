@@ -3,6 +3,7 @@ package com.example.crudmahasiswa.controllers;
 import com.example.crudmahasiswa.dto.fakultasdto.FakultasDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanInsertDto;
+import com.example.crudmahasiswa.dto.jurusandto.JurusanMahasiswaDto;
 import com.example.crudmahasiswa.helpers.ResponseUtil;
 import com.example.crudmahasiswa.models.Jurusan;
 import com.example.crudmahasiswa.models.ResponseDto;
@@ -44,6 +45,20 @@ public class JurusanController {
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         }catch (Exception e){
             ResponseDto<List<JurusanDto>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
+            return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
+
+        }
+    }
+
+    @GetMapping("/mahasiswa")
+    public ResponseEntity<ResponseDto<List<JurusanMahasiswaDto>>>getJurusanMahasiswa(){
+        try{
+            List<JurusanMahasiswaDto> jurusanDtos = jurusanService.getJurusanMahasiswa();
+
+            ResponseDto<List<JurusanMahasiswaDto>> responseDto = ResponseUtil.responseDtoSuccess(jurusanDtos, "Data Seluruh Mahasiswa yang mengikuti Jurusan Success");
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        }catch (Exception e){
+            ResponseDto<List<JurusanMahasiswaDto>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
             return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
 
         }

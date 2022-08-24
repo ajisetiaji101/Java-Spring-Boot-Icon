@@ -2,6 +2,7 @@ package com.example.crudmahasiswa.controllers;
 
 import com.example.crudmahasiswa.dto.jurusandto.JurusanDto;
 import com.example.crudmahasiswa.dto.jurusandto.JurusanInsertDto;
+import com.example.crudmahasiswa.dto.matakuliahdto.MataKuliahMahasiswaDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahInsertDto;
 import com.example.crudmahasiswa.helpers.ResponseUtil;
@@ -52,14 +53,14 @@ public class MatakuliahController {
     }
 
     @GetMapping("mahasiswa")
-    public ResponseEntity<ResponseDto<List<Matakuliah>>>getMahasiswa(){
+    public ResponseEntity<ResponseDto<List<MataKuliahMahasiswaDto>>>getMahasiswa(){
         try{
-            List<Matakuliah> matakuliahDtos = matakuliahService.getData();
+            List<MataKuliahMahasiswaDto> matakuliahDtos = matakuliahService.getData();
 
-            ResponseDto<List<Matakuliah>> responseDto = ResponseUtil.responseDtoSuccess(matakuliahDtos, "Data Seluruh Mata Kuliah Success");
+            ResponseDto<List<MataKuliahMahasiswaDto>> responseDto = ResponseUtil.responseDtoSuccess(matakuliahDtos, "Data Seluruh Mata Kuliah Success");
             return new ResponseEntity<>(responseDto, HttpStatus.OK);
         }catch (Exception e){
-            ResponseDto<List<Matakuliah>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
+            ResponseDto<List<MataKuliahMahasiswaDto>> responseDto = ResponseUtil.responseDtoFailed(null,e.getMessage(), HttpStatus.CREATED);
             return new ResponseEntity<>(responseDto,HttpStatus.BAD_REQUEST);
 
         }

@@ -1,5 +1,6 @@
 package com.example.crudmahasiswa.services;
 
+import com.example.crudmahasiswa.dto.matakuliahdto.MataKuliahMahasiswaDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahDto;
 import com.example.crudmahasiswa.dto.matakuliahdto.MatakuliahInsertDto;
 import com.example.crudmahasiswa.models.Mahasiswa;
@@ -11,5 +12,5 @@ import java.util.UUID;
 public interface MatakuliahService {
     MatakuliahDto create(MatakuliahInsertDto matakuliahInsertDto);
     List<MatakuliahDto> getAll();
-    List<Matakuliah> getData();
+    List<MataKuliahMahasiswaDto> getData();
 }
